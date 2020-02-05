@@ -4,6 +4,8 @@
 
 * Syntax highlighting for Backbone (.bb) files
 
+![highlight example](code.png)
+
 ## Requirements
 
 * None
