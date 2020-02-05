@@ -175,7 +175,7 @@
                 },
                 {
                     "name": "keyword.control",
-                    "match": "if|call|return"
+                    "match": "if|call-vargs|call|return"
                 },
                 {
                     "name": "keyword.operator.comparison",
