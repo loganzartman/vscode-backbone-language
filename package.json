@@ -1,0 +1,25 @@
+{
+    "name": "backbone-language",
+    "displayName": "backbone-language",
+    "description": "Language support for Backbone",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "backbone",
+            "aliases": ["Backbone", "backbone"],
+            "extensions": [".bb"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "backbone",
+            "scopeName": "source.backbone",
+            "path": "./syntaxes/backbone.tmLanguage.json"
+        }]
+    }
+}

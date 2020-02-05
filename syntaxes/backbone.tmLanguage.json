@@ -1,0 +1,253 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Backbone",
+    "patterns": [
+        {
+            "include": "#texp"
+        },
+        {
+            "include": "#comment"
+        }
+    ],
+    "repository": {
+        "texp": {
+            "patterns": [
+                {
+                    "include": "#special-texp"
+                },
+                {
+                    "include": "#basic-texp"
+                }
+            ]
+        },
+        "special-texp": {
+            "patterns": [
+                {
+                    "include": "#cast"
+                },
+                {
+                    "include": "#params"
+                },
+                {
+                    "include": "#decl"
+                },
+                {
+                    "include": "#def"
+                }
+            ]
+        },
+        "basic-texp": {
+            "begin": "\\(",
+            "end": "\\)",
+            "patterns": [
+                {
+                    "include": "#texp-term"
+                }
+            ]
+        },
+        "texp-term": {
+            "patterns": [
+                {
+                    "include": "#texp"
+                },
+                {
+                    "include": "#comment"
+                },
+                {
+                    "include": "#keyword"
+                },
+                {
+                    "include": "#name"
+                },
+                {
+                    "include": "#number"
+                },
+                {
+                    "include": "#string"
+                }
+            ]
+        },
+        "comment": {
+            "patterns": [
+                {
+                    "name": "comment.line",
+                    "match": ";.*"
+                }
+            ]
+        },
+        "cast": {
+            "begin": "\\(\\s*(cast)\\s+([^()\\s]+)",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword"
+                },
+                "2": {
+                    "name": "storage.type"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#texp-term"
+                }
+            ]
+        },
+        "params": {
+            "begin": "\\(\\s*(params)",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword"
+                }
+            },
+            "patterns": [
+                {
+                    "match": "\\(([^()\\s]+)\\s+([^()\\s]+)\\)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.parameter"
+                        },
+                        "2": {
+                            "name": "storage.type"
+                        }
+                    }
+                }
+            ]
+        },
+        "decl": {
+            "begin": "\\(\\s*(decl)\\s+([^()\\s]+)",
+            "end": "([^()\\s]+)\\s*\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword"
+                },
+                "2": {
+                    "name": "support.function"
+                }
+            },
+            "endCaptures": {
+                "1": {
+                    "name": "storage.type"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#types"
+                }
+            ]
+        },
+        "def": {
+            "begin": "\\(\\s*(def)\\s+([^()\\s]+)",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword"
+                },
+                "2": {
+                    "name": "support.function"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#texp"
+                },
+                {
+                    "name":"storage.type",
+                    "match": "[^()\\s]+"
+                }
+            ]
+        },
+        "keyword": {
+            "patterns": [
+                {
+                    "include": "#call-function"
+                },
+                {
+                    "include": "#types"
+                },
+                {
+                    "name": "storage.type",
+                    "match": "void"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "return-void"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "if|call|return"
+                },
+                {
+                    "name": "keyword.operator.comparison",
+                    "match": "(<|<=|==|=>|>|!=)(?=[()\\s])"
+                },
+                {
+                    "name": "keyword.operator",
+                    "match": "(\\+|-|\\*|/|%)(?=[()\\s])"
+                },
+                {
+                    "name": "keyword",
+                    "match": "auto|args|cast|do|include|let|load|params|store"
+                }
+            ]
+        },
+        "call-function": {
+            "patterns": [
+                {
+                    "match": "(call|call-tail)\\s+([^()\\s]+)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword"
+                        },
+                        "2": {
+                            "name": "support.function"
+                        }
+                    }
+                }
+            ]
+        },
+        "types": {
+            "match": "(types)\\s+([^()]+)",
+            "captures": {
+                "1": {
+                    "name": "keyword"
+                },
+                "2": {
+                    "name": "storage.type"
+                }
+            }
+        },
+        "name": {
+            "patterns": [
+                {
+                    "name": "variable",
+                    "match": "%[^()\\s]+"
+                },
+                {
+                    "name": "variable",
+                    "match": "@[^()\\s]+"
+                }
+            ]
+        },
+        "number": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "[0-9]+"
+                }
+            ]
+        },
+        "string": {
+            "name": "string.quoted.double.backbone",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.backbone",
+                    "match": "\\\\[0-9a-fA-F]{2}"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.backbone"
+}
