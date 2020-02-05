@@ -33,6 +33,9 @@
                 },
                 {
                     "include": "#def"
+                },
+                {
+                    "include": "#struct"
                 }
             ]
         },
@@ -154,6 +157,36 @@
                 {
                     "name":"storage.type",
                     "match": "[^()\\s]+"
+                }
+            ]
+        },
+        "struct": {
+            "begin": "\\(\\s*(struct)\\s+([^()\\s]+)",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword"
+                },
+                "2": {
+                    "name": "variable.name"
+                }
+            },
+            "patterns": [
+                {
+                    "match": "\\(\\s*([^()\\s]+)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.name"
+                        }
+                    }
+                },
+                {
+                    "match": "([^()\\s]+)\\s*\\)",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type"
+                        }
+                    }
                 }
             ]
         },
