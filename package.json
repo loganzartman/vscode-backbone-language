@@ -2,6 +2,8 @@
     "name": "backbone-language",
     "displayName": "backbone-language",
     "description": "Language support for Backbone",
+    "publisher": "loganz",
+    "repository": "https://github.com/loganzartman/vscode-backbone-language",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.41.0"
