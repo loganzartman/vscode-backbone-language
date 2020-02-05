@@ -179,7 +179,7 @@
                 },
                 {
                     "name": "keyword.operator.comparison",
-                    "match": "(<|<=|==|=>|>|!=)(?=[()\\s])"
+                    "match": "(<|<=|==|>=|>|!=)(?=[()\\s])"
                 },
                 {
                     "name": "keyword.operator",
